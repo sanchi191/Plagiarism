@@ -1,0 +1,11 @@
+1) change point deetction algorithms aim to identify instances in a sequence where the data distribution changes (indicating underlying class change)
+
+
+Algorithm - 
+a) Given a sequence X : x_1,x_2,..,x_N of N vectors (D dimensional), first step to detect all change points. Form consecutive length windows, either assume they belong to some distribution (parametric) and find KL distance between them or find MMD with RBF (better way since non-parametric) and threshold it.
+
+b) Once change points detected, form 2 sets P_s and P_d around change points
+
+c) Train a negtork f() based on hinge loss with KL divergence. The final output is a distribution over C classes. Use labbelled as well as unlabelled samples.
+
+d) Fix f(). Now train the last supervised classifier g(). f() ensures that proper clusters are formed, thus entropy regularisation is the way ahead. Make two sets X_l (labelled containing input and target) and X_u (individual subsequences by change point detection). The loss function is cross_entropy + lambda*negative_entropy to ensure boundary is pushed towards low density regions.

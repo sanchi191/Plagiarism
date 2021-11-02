@@ -1,0 +1,10 @@
+Employ contrastive learning to CPD problem. Whenever learnt representations differ significantly between time adjacent intervals, a change point is more likely to be present.
+
+Algorithm - 
+a) Given multivariate time series data (X_1,X_2,X_3,...,X_T) of T observations.
+
+b) First an auto-regressive deep CNN Wavenet used to encode each window. 3 layer MLP is added. Cosine similarity computed between embeddings of consecutive time windows computed to detect change points.
+
+c) Contrastive loss to train the network. Single pair of contiguous time windows - positive pair, set of window pairs separated across time - negative pair. The intuition is that time series are generally non-stationary, so windows that are temporally separate from one another are likely to exhibit weaker statistical dependencies than adjacent windows.
+
+

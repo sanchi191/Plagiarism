@@ -1,0 +1,21 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <script>
+    $(document).ready(function(){
+        $('#id_file').attr("multiple","true");
+
+    })
+    </script>
+    <h2 class="account-heading">{{ user.username }}</h2>
+    <p class="text-secondary">{{ user.email }}</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="files" value="upload" required multiple>
+        <button type="submit">Upload file</button>
+    </form>
+    {% if url %}
+        <p>Uploaded File: <a href="{{url}}">{{url}}</a></p>
+    {% endif %}
+    
+{% endblock content %}
